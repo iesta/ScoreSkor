@@ -386,26 +386,31 @@ html, body {
 
 .score-btn:active {
   transform: scale(0.93);
+  filter: brightness(0.85);
 }
 
 .score-btn-neg-big {
-  background: var(--hotpink-dark);
+  background: #C02660;
   color: #fff;
+  box-shadow: 0 2px 8px rgba(192, 38, 96, 0.4);
 }
 
 .score-btn-neg {
-  background: rgba(255, 59, 139, 0.15);
-  color: var(--hotpink);
+  background: #FF3B8B;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(255, 59, 139, 0.3);
 }
 
 .score-btn-pos {
-  background: rgba(0, 212, 255, 0.12);
-  color: var(--cyan);
+  background: #00D4FF;
+  color: #0A1628;
+  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
 }
 
 .score-btn-pos-big {
-  background: var(--cyan);
+  background: #0099CC;
   color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 153, 204, 0.4);
 }
 
 /* Menu */
