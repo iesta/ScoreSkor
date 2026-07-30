@@ -95,6 +95,24 @@ const App = (() => {
     input.inputMode = 'text';
     input.autocapitalize = 'words';
     input.addEventListener('input', updateAddRemoveButtons);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const val = input.value.trim();
+        if (!val) return;
+        const inputs = $$('.player-input-wrap input', playerInputsEl);
+        const cur = inputs.indexOf(input);
+        if (cur === inputs.length - 1) {
+          if (inputs.length < 8) {
+            addPlayerInput();
+            const all = $$('.player-input-wrap input', playerInputsEl);
+            all[all.length - 1].focus();
+          }
+        } else {
+          inputs[cur + 1].focus();
+        }
+      }
+    });
 
     wrap.appendChild(removeBtn);
     wrap.appendChild(input);
