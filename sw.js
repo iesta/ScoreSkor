@@ -1,15 +1,16 @@
-const CACHE_NAME = 'scoreskor-v2';
+const CACHE_NAME = 'scoreskor-v3';
+const BASE = self.location.pathname.replace(/\/sw\.js$/, '');
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/storage.js',
-  '/js/sound.js',
-  '/js/app.js',
-  '/icons/icon.svg',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/manifest.json'
+  BASE + '/',
+  BASE + '/index.html',
+  BASE + '/css/style.css',
+  BASE + '/js/storage.js',
+  BASE + '/js/sound.js',
+  BASE + '/js/app.js',
+  BASE + '/icons/icon.svg',
+  BASE + '/icons/icon-192.png',
+  BASE + '/icons/icon-512.png',
+  BASE + '/manifest.json'
 ];
 
 self.addEventListener('install', event => {
