@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ScoreSkor</title>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/icon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Anta&family=Erica+One&family=Henny+Penny&family=Luckiest+Guy&family=Quicksand&display=swap" rel="stylesheet">
+
+  <meta name="theme-color" content="#0A1628">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ScoreSkor">
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div id="setup-screen" class="screen">
+    <div class="setup-card">
+      <h1 class="app-title">ScoreSkor</h1>
+      <p class="setup-subtitle">Add 2 to 8 players</p>
+      <div id="player-inputs"></div>
+      <div class="setup-actions">
+        <button id="add-player-btn" class="btn-add-player" title="Add player">+ Player</button>
+      </div>
+      <button id="setup-ok-btn" class="btn-primary">OK</button>
+    </div>
+  </div>
+
+  <div id="game-screen" class="screen" style="display:none">
+    <div class="game-header">
+      <span class="header-logo">ScoreSkor</span>
+      <button id="hamburger-btn" class="btn-hamburger" title="Menu">
+        <span class="hamburger-icon"></span>
+      </button>
+    </div>
+    <div id="score-grid" class="score-grid"></div>
+  </div>
+
+  <div id="score-edit-overlay" class="overlay" style="display:none">
+    <div class="overlay-card">
+      <div id="edit-player-name" class="edit-player-name"></div>
+      <div id="edit-player-score" class="edit-player-score">0</div>
+      <div class="edit-score-buttons">
+        <button class="score-btn score-btn-neg" data-delta="-1">−1</button>
+        <button class="score-btn score-btn-pos" data-delta="+1">+1</button>
+        <button class="score-btn score-btn-neg-big" data-delta="-5">−5</button>
+        <button class="score-btn score-btn-pos-big" data-delta="+5">+5</button>
+      </div>
+      <button id="score-edit-ok" class="btn-primary">OK</button>
+    </div>
+  </div>
+
+  <div id="menu-overlay" class="overlay" style="display:none">
+    <div class="overlay-card menu-card">
+      <div class="menu-title">Menu</div>
+      <button class="menu-btn" data-action="new">New Score</button>
+      <button class="menu-btn" data-action="reset">Reset</button>
+      <button class="menu-btn" data-action="preferences">Preferences</button>
+      <button class="menu-btn" data-action="install" id="menu-install-btn" style="display:none">Install</button>
+      <button class="menu-btn" data-action="about">About</button>
+      <button class="menu-btn menu-btn-close" data-action="close">Close</button>
+    </div>
+  </div>
+
+  <div id="preferences-overlay" class="overlay" style="display:none">
+    <div class="overlay-card pref-card">
+      <h2>Preferences</h2>
+      <label class="pref-toggle">
+        <span>Sound</span>
+        <input type="checkbox" id="sound-toggle" checked>
+        <span class="toggle-switch"></span>
+      </label>
+      <label class="pref-toggle">
+        <span>Horizontal view</span>
+        <input type="checkbox" id="horizontal-toggle">
+        <span class="toggle-switch"></span>
+      </label>
+      <div class="pref-font">
+        <label for="font-select">Font</label>
+        <select id="font-select">
+          <option value="Henny Penny">Henny Penny</option>
+          <option value="Luckiest Guy">Luckiest Guy</option>
+          <option value="Anta">Anta</option>
+          <option value="Erica One">Erica One</option>
+          <option value="Aldrich">Aldrich</option>
+          <option value="Quicksand">Quicksand</option>
+          <option value="Google Sans">Google Sans</option>
+          <option value="Elms Sans">Elms Sans</option>
+        </select>
+      </div>
+      <button class="btn-primary close-prefs">OK</button>
+    </div>
+  </div>
+
+  <div id="about-overlay" class="overlay" style="display:none">
+    <div class="overlay-card about-card">
+      <h2>ScoreSkor</h2>
+      <p>v1.0.0</p>
+      <p class="about-sub">Simple score keeper for 2–8 players</p>
+      <button class="btn-primary close-about">OK</button>
+    </div>
+  </div>
+
+  <div id="confirm-overlay" class="overlay" style="display:none">
+    <div class="overlay-card confirm-card">
+      <p id="confirm-message"></p>
+      <div class="confirm-buttons">
+        <button id="confirm-yes" class="btn-primary btn-confirm-yes">Yes</button>
+        <button id="confirm-no" class="btn-secondary">No</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/storage.js"></script>
+  <script src="/js/sound.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
