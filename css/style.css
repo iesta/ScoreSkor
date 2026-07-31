@@ -413,6 +413,14 @@ html, body {
   box-shadow: 0 2px 8px rgba(0, 153, 204, 0.4);
 }
 
+.keyboard-hints {
+  margin-top: 12px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+  letter-spacing: 2px;
+}
+
 /* Menu */
 .menu-card {
   position: fixed;
