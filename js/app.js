@@ -1,6 +1,7 @@
 const App = (() => {
   let players = [];
   let currentEditIndex = -1;
+  let scoreEditOriginal = 0;
 
   /* DOM refs */
   const $ = (s, p) => (p || document).querySelector(s);
@@ -194,9 +195,11 @@ const App = (() => {
   function openScoreEdit(index) {
     currentEditIndex = index;
     const player = players[index];
+    scoreEditOriginal = player.score;
     editPlayerName.textContent = player.name;
     editPlayerScore.textContent = player.score;
     showOverlay(scoreEditOverlay);
+    document.addEventListener('keydown', scoreEditKeyHandler);
   }
 
   function applyScore(delta) {
@@ -227,9 +230,28 @@ const App = (() => {
     }
   }
 
+  function scoreEditKeyHandler(e) {
+    if (e.key === 'h') { e.preventDefault(); applyScore(-5); }
+    else if (e.key === 'j') { e.preventDefault(); applyScore(-1); }
+    else if (e.key === 'k') { e.preventDefault(); applyScore(1); }
+    else if (e.key === 'l') { e.preventDefault(); applyScore(5); }
+    else if (e.key === 'Enter') { e.preventDefault(); closeScoreEdit(); }
+    else if (e.key === 'Escape') { e.preventDefault(); cancelScoreEdit(); }
+  }
+
+  function cancelScoreEdit() {
+    if (currentEditIndex >= 0) {
+      players[currentEditIndex].score = scoreEditOriginal;
+      DataStore.save(players);
+      updateGridCell(currentEditIndex);
+    }
+    closeScoreEdit();
+  }
+
   function closeScoreEdit() {
     hideOverlay(scoreEditOverlay);
     currentEditIndex = -1;
+    document.removeEventListener('keydown', scoreEditKeyHandler);
   }
 
   /* ========== NAME EDIT ========== */
