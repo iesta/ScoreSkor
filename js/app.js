@@ -453,6 +453,48 @@ const App = (() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js').catch(() => {});
     }
+
+    /* Pull to refresh */
+    setupPullToRefresh();
+  }
+
+  function setupPullToRefresh() {
+    const indicator = document.querySelector('.pull-indicator');
+    if (!indicator) return;
+    let startY = 0;
+    let pulling = false;
+    let pullDist = 0;
+    const THRESHOLD = 60;
+
+    document.addEventListener('touchstart', e => {
+      if (gameScreen.scrollTop > 0) return;
+      startY = e.touches[0].clientY;
+      pulling = true;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', e => {
+      if (!pulling) return;
+      pullDist = e.touches[0].clientY - startY;
+      if (pullDist > 20) {
+        indicator.classList.add('active');
+        if (pullDist >= THRESHOLD) indicator.classList.add('ready');
+        else indicator.classList.remove('ready');
+      } else {
+        indicator.classList.remove('active', 'ready');
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', () => {
+      if (!pulling) return;
+      pulling = false;
+      if (pullDist >= THRESHOLD) {
+        indicator.classList.remove('active', 'ready');
+        window.location.reload();
+      } else {
+        indicator.classList.remove('active', 'ready');
+      }
+      pullDist = 0;
+    }, { passive: true });
   }
 
   return { init };

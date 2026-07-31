@@ -194,6 +194,32 @@ html, body {
 }
 
 /* ===== GAME SCREEN ===== */
+.pull-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  color: var(--cyan);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  z-index: 10;
+  overflow: hidden;
+  transition: height 0.15s ease;
+}
+
+.pull-indicator.active {
+  height: 48px;
+}
+
+.pull-indicator.ready {
+  color: var(--hotpink);
+}
+
 .game-header {
   position: fixed;
   top: 0;
