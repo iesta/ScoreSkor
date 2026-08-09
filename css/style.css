@@ -381,6 +381,33 @@ html, body {
   margin-bottom: 4px;
 }
 
+.edit-score-diff {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  min-height: 1.4em;
+}
+
+.edit-score-diff .original {
+  opacity: 0.5;
+}
+
+.edit-score-diff .delta {
+  font-style: italic;
+}
+
+.edit-score-diff .delta.positive {
+  color: var(--cyan);
+}
+
+.edit-score-diff .delta.negative {
+  color: var(--hotpink);
+}
+
 .edit-player-score {
   font-size: 4rem;
   color: var(--text);

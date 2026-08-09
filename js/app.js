@@ -2,6 +2,7 @@ const App = (() => {
   let players = [];
   let currentEditIndex = -1;
   let scoreEditOriginal = 0;
+  let scoreEditDelta = 0;
 
   /* DOM refs */
   const $ = (s, p) => (p || document).querySelector(s);
@@ -18,6 +19,8 @@ const App = (() => {
   const scoreEditOverlay = $('#score-edit-overlay');
   const editPlayerName = $('#edit-player-name');
   const editPlayerScore = $('#edit-player-score');
+  const editScoreOriginal = $('#edit-score-original');
+  const editScoreDelta = $('#edit-score-delta');
   const scoreEditOk = $('#score-edit-ok');
 
   const menuOverlay = $('#menu-overlay');
@@ -196,7 +199,11 @@ const App = (() => {
     currentEditIndex = index;
     const player = players[index];
     scoreEditOriginal = player.score;
+    scoreEditDelta = 0;
     editPlayerName.textContent = player.name;
+    editScoreOriginal.textContent = player.score;
+    editScoreDelta.textContent = '';
+    editScoreDelta.className = 'delta';
     editPlayerScore.textContent = player.score;
     showOverlay(scoreEditOverlay);
     document.addEventListener('keydown', scoreEditKeyHandler);
@@ -206,6 +213,12 @@ const App = (() => {
     if (currentEditIndex < 0) return;
     const player = players[currentEditIndex];
     player.score += delta;
+    scoreEditDelta += delta;
+
+    const sign = scoreEditDelta > 0 ? '+' : '';
+    editScoreDelta.textContent = `(${sign}${scoreEditDelta})`;
+    editScoreDelta.classList.remove('positive', 'negative');
+    editScoreDelta.classList.add(scoreEditDelta >= 0 ? 'positive' : 'negative');
 
     editPlayerScore.textContent = player.score;
     editPlayerScore.classList.remove('pulse');
